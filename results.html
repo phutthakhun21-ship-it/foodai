@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ผลลัพธ์ – แอปแนะนำเมนูอาหาร</title>
+  <link rel="icon" type="image/png" href="./images/logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +27,16 @@
   <script src="./assets/app.js"></script>
   <script>
     renderResults('results');
+     (function () {
+    const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    const isReload = nav ? (nav.type === 'reload')
+                         : (performance && performance.navigation && performance.navigation.type === 1);
+
+    if (isReload) {
+      const thisPage = encodeURIComponent(location.pathname.split('/').pop() || 'results.html');
+      location.replace(`./index.html?next=${thisPage}`);
+    }
+  })();
   </script>
 </body>
 </html>

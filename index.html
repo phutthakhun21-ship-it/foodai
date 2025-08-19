@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>แอปแนะนำเมนูอาหาร – โหลด</title>
+  <link rel="icon" type="image/png" href="./images/logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,10 +66,15 @@
     </div>
   </div>
 
-  <script>
-    // เปลี่ยนหน้าไป input.html หลังจาก 3.5 วินาที
+    <script>
+    // อ่านพารามิเตอร์ next ถ้ามี เช่น index.html?next=results.html
+    const params = new URLSearchParams(location.search);
+    const next = params.get('next') || './input.html';
+
     window.addEventListener('load', () => {
-      setTimeout(() => { window.location.href = './input.html'; }, 3500);
+      setTimeout(() => { 
+        location.replace(next); 
+      }, 3500);
     });
   </script>
 </body>

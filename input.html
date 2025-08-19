@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>กรอกข้อมูล – แอปแนะนำเมนูอาหาร</title>
+  <link rel="icon" type="image/png" href="./images/logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +23,7 @@
     <div class="bg-white rounded-2xl shadow-xl p-8 border border-pink-200">
       <h2 class="text-2xl font-semibold text-pink-800 mb-6 text-center">📝 กรอกข้อมูลของคุณ</h2>
 
-      <!-- วัตถุดิบ (จะถูกเรนเดอร์จาก data.js) -->
+      <!-- วัตถุดิบ (จะถูกเรนเดอร์จาก data.js / app.js) -->
       <div class="mb-6">
         <label class="block text-lg font-medium text-pink-700 mb-3">🥘 วัตถุดิบที่มีในบ้าน:</label>
         <div id="ingredientsGrid" class="grid grid-cols-2 gap-2 mb-3 max-h-80 overflow-y-auto bg-pink-50 p-4 rounded-lg border border-pink-200"></div>
@@ -31,28 +32,72 @@
       <!-- งบประมาณ -->
       <div class="mb-6">
         <label class="block text-lg font-medium text-pink-700 mb-3">💰 งบประมาณ (บาท):</label>
-        <input type="number" id="budget" placeholder="เช่น 30" min="10" max="200" class="w-full p-4 border-2 border-pink-200 rounded-lg focus:border-pink-500 focus:outline-none text-lg bg-pink-50">
+        <input
+          type="number"
+          id="budget"
+          placeholder="เช่น 30"
+          min="10"
+          max="200"
+          class="w-full p-4 border-2 border-pink-200 rounded-lg focus:border-pink-500 focus:outline-none text-lg bg-pink-50">
       </div>
 
       <!-- ปุ่มค้นหา -->
-      <button id="btnFind" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold py-4 px-6 rounded-lg hover:from-pink-600 hover:to-rose-600 transition-all duration-300 transform hover:scale-105 shadow-lg text-lg">
+      <button
+        id="btnFind"
+        class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold py-4 px-6 rounded-lg hover:from-pink-600 hover:to-rose-600 transition-all duration-300 transform hover:scale-105 shadow-lg text-lg">
         🔍 ค้นหาเมนูแนะนำ
       </button>
+
+      <!-- ปุ่มเริ่มใหม่/รีเซ็ตข้อมูล (ออปชัน) -->
+      <div class="mt-4 text-center">
+        <button
+          id="resetBtn"
+          type="button"
+          class="inline-flex items-center gap-2 bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
+          ♻️ ล้างค่าที่เลือก
+        </button>
+      </div>
     </div>
   </div>
 
+  <!-- โหลดฐานข้อมูลกับลอจิกหลัก -->
   <script src="./assets/data.js"></script>
   <script src="./assets/app.js"></script>
   <script>
-    // เรนเดอร์รายการวัตถุดิบ
+    // เรนเดอร์รายการวัตถุดิบจาก ingredientCosts
     renderIngredientCheckboxes('ingredientsGrid');
 
-    // โหลดค่าที่เคยเลือกไว้
+    // โหลดค่าที่เคยเลือกไว้ (ingredients + budget) จาก localStorage
     restoreSelections('budget');
 
-    // ค้นหาและไปหน้าผลลัพธ์
+    // เมื่อกด "ค้นหาเมนูแนะนำ": บันทึก selections แล้วไปหน้าโหลด -> results.html
     document.getElementById('btnFind').addEventListener('click', () => {
-      handleFindClick('budget');
+      const selectedIngredients = Array.from(
+        document.querySelectorAll('.ingredient-checkbox:checked')
+      ).map(cb => cb.value);
+
+      const budget = parseInt(document.getElementById('budget').value) || 0;
+
+      if (selectedIngredients.length === 0 && budget === 0) {
+        alert('กรุณาเลือกวัตถุดิบหรือใส่งบประมาณอย่างน้อย 1 อย่างนะ!');
+        return;
+      }
+
+      // บันทึก selections ให้ results.html ใช้ (คีย์เดียวกับใน app.js)
+      localStorage.setItem('foodAppSelections', JSON.stringify({
+        ingredients: selectedIngredients,
+        budget: budget
+      }));
+
+      // ไปหน้าโหลด แล้วให้โหลดเสร็จเด้งไป results.html
+      window.location.href = './index.html?next=results.html';
+    });
+
+    // ปุ่ม "เริ่มใหม่": ล้าง checkbox + งบประมาณ + localStorage
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      document.querySelectorAll('.ingredient-checkbox').forEach(cb => cb.checked = false);
+      document.getElementById('budget').value = '';
+      localStorage.removeItem('foodAppSelections');
     });
   </script>
 </body>
