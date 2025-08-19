@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ผลลัพธ์ – แอปแนะนำเมนูอาหาร</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-rose-100 min-h-screen" style="font-family:'Sarabun',sans-serif;">
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-pink-800 mb-2">🍽️ เมนูแนะนำสำหรับคุณ</h1>
+      <a href="./input.html" class="bg-pink-100 text-pink-700 px-4 py-2 rounded-lg hover:bg-pink-200 transition-colors">← กลับไปแก้ไขข้อมูล</a>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="space-y-4"></div>
+  </div>
+
+  <script src="./assets/data.js"></script>
+  <script src="./assets/app.js"></script>
+  <script>
+    renderResults('results');
+  </script>
+</body>
+</html>

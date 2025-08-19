@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แอปแนะนำเมนูอาหาร – โหลด</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-rose-100 min-h-screen" style="font-family:'Sarabun',sans-serif;">
+  <!-- หน้าโหลด -->
+  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-400 via-rose-400 to-red-400">
+    <div class="text-center">
+      <!-- Logo และชื่อทีม -->
+      <div class="mb-8">
+        <div class="text-8xl mb-4 animate-bounce">
+          <p class="text-center">
+            <img src="./images/it.png" alt="logo" width="300" height="300" class="mx-auto" />
+          </p>
+        </div>
+        <h1 class="text-5xl font-bold text-white mb-2 drop-shadow-lg">แอปแนะนำเมนูอาหาร</h1>
+        <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 inline-block">
+          <p class="text-white text-xl font-semibold">โดยทีม "LOVE IT เลย"</p>
+        </div>
+      </div>
+
+      <!-- อนิเมชันอาหาร -->
+      <div class="mb-8">
+        <div class="flex justify-center space-x-4 mb-4">
+          <div class="text-4xl animate-pulse">🍚</div>
+          <div class="text-4xl animate-pulse" style="animation-delay: .2s;">🍛</div>
+          <div class="text-4xl animate-pulse" style="animation-delay: .4s;">🍜</div>
+          <div class="text-4xl animate-pulse" style="animation-delay: .6s;">🥗</div>
+          <div class="text-4xl animate-pulse" style="animation-delay: .8s;">🍲</div>
+        </div>
+        <p class="text-white/90 text-lg">ค้นหาเมนูอาหารที่เหมาะกับวัตถุดิบและงบประมาณของคุณ</p>
+      </div>
+
+      <!-- Loading Bar -->
+      <div class="mb-8">
+        <div class="w-64 h-2 bg-white/30 rounded-full mx-auto overflow-hidden">
+          <div class="h-full bg-white rounded-full loading-bar"></div>
+        </div>
+        <p class="text-white/80 mt-2 text-sm">กำลังเตรียมความอร่อย...</p>
+      </div>
+
+      <!-- Features -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+          <div class="text-2xl mb-2">💰</div>
+          <p class="text-white text-sm">คำนวณราคาจริง</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+          <div class="text-2xl mb-2">🥘</div>
+          <p class="text-white text-sm">เมนูหลากหลาย</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+          <div class="text-2xl mb-2">⚡</div>
+          <p class="text-white text-sm">ใช้งานง่าย</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // เปลี่ยนหน้าไป input.html หลังจาก 3.5 วินาที
+    window.addEventListener('load', () => {
+      setTimeout(() => { window.location.href = './input.html'; }, 3500);
+    });
+  </script>
+</body>
+</html>
