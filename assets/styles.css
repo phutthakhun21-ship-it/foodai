@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+body { font-family: 'Sarabun', sans-serif; }
+
+/* Loading Bar Animation */
+.loading-bar { width: 0%; animation: loadingProgress 3s ease-in-out forwards; }
+@keyframes loadingProgress { 0%{width:0%} 50%{width:70%} 100%{width:100%} }
+
+/* Floating Animation */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.animate-float { animation: float 2s ease-in-out infinite; }
+
+/* สไตล์รายการวัตถุดิบ (ใช้ CSS ปกติแทน @apply เพื่อรองรับ CDN) */
+.ingredient-checkbox { margin-right: .5rem; }
+.ingredient-item {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  transition: background-color .2s ease;
+}
+.ingredient-item:hover {
+  background-color: rgba(0,0,0,0.04);
+}
